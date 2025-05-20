@@ -10,7 +10,6 @@ import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 import {
   ErrorComponent,
   RefineSnackbarProvider,
-  ThemedLayoutV2,
   useNotificationProvider,
 } from "@refinedev/mui";
 
@@ -52,6 +51,11 @@ axiosInstance.interceptors.request.use((config) => {
 
   return config;
 });
+
+import { ThemedLayoutV2 } from "./components/layout";
+import { ThemedHeaderV2 } from "./components/layout/header";
+import { ThemedSiderV2 } from "./components/layout/sider";
+import { ThemedTitleV2 } from "./components/layout/title";
 
 function App() {
   const authProvider: AuthBindings = {
@@ -180,7 +184,13 @@ function App() {
                         key="authenticated-inner"
                         fallback={<CatchAllNavigate to="/login" />}
                       >
-                        <ThemedLayoutV2 Header={Header}>
+                        <ThemedLayoutV2 
+                         Header={ThemedHeaderV2}
+                        Sider={ThemedSiderV2}
+                         Title={ThemedTitleV2}
+                        
+                        
+                        >
                           <Outlet />
                         </ThemedLayoutV2>
                       </Authenticated>

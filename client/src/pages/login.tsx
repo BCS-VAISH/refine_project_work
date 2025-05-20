@@ -9,8 +9,7 @@ import { ThemedTitleV2 } from "@refinedev/mui";
 import { CredentialResponse } from "../interfaces/google";
 
 // Todo: Update your Google Client ID here
-const GOOGLE_CLIENT_ID =
-  "1041339102270-e1fpe2b6v6u1didfndh7jkjmpcashs4f.apps.googleusercontent.com";
+
 
 export const Login: React.FC = () => {
   const { mutate: login } = useLogin<CredentialResponse>();
@@ -26,7 +25,7 @@ export const Login: React.FC = () => {
       try {
         window.google.accounts.id.initialize({
           ux_mode: "popup",
-          client_id: GOOGLE_CLIENT_ID,
+          client_id: "786161706915-unlc40sa1nimdvp4m4n8u4g8pf2pa1m2.apps.googleusercontent.com",
           callback: async (res: CredentialResponse) => {
             if (res.credential) {
               login(res);
