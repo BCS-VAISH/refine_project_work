@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import { ThemedTitleV2 } from "@refinedev/mui";
+import { ThemedTitleV2 } from "../components/layout/title";
 
 import { CredentialResponse } from "../interfaces/google";
 
@@ -46,12 +46,17 @@ export const Login: React.FC = () => {
   };
 
   return (
+    <Box
+       component="div"
+       sx={{backgroundColor: '#FCFCFC'}}
+     >
     <Container
       style={{
         height: "100vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        
       }}
     >
       <Box
@@ -64,6 +69,7 @@ export const Login: React.FC = () => {
           collapsed={false}
           wrapperStyles={{
             fontSize: "22px",
+            display: "flex",
             justifyContent: "center",
           }}
         />
@@ -81,5 +87,6 @@ export const Login: React.FC = () => {
         </Typography>
       </Box>
     </Container>
+    </Box>
   );
 };

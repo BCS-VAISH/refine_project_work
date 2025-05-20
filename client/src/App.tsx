@@ -42,6 +42,29 @@ import {
 import { Login } from "./pages/login";
 import { parseJwt } from "./utils/parse-jwt";
 
+import{
+  AccountCircleOutlined,
+  ChatBubbleOutlined,
+  Dashboard,
+  PeopleAltOutlined,
+  StarOutlineRounded,
+  VillaOutlined,
+
+}from "@mui/icons-material";
+
+
+import { 
+
+  Home,
+  Agents,
+  MyProfile,
+  PropertyDetails,
+  AllProperties,
+  CreateProperty,
+  AgentProfile,
+  EditProperty,
+ } from "./pages";
+
 const axiosInstance = axios.create();
 axiosInstance.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
@@ -144,27 +167,56 @@ function App() {
           <RefineSnackbarProvider>
             <DevtoolsProvider>
               <Refine
-                dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
+                dataProvider={dataProvider("http://localhost:8080/api/v1")}
                 notificationProvider={useNotificationProvider}
                 routerProvider={routerBindings}
                 authProvider={authProvider}
+                DashboardPage={Home}
                 resources={[
                   {
-                    name: "blog_posts",
-                    list: "/blog-posts",
-                    create: "/blog-posts/create",
-                    edit: "/blog-posts/edit/:id",
-                    show: "/blog-posts/show/:id",
+                    name: "properties",
+                    icon: <VillaOutlined/>,
+                    list: AllProperties,
+                    show: PropertyDetails,
+                    create: CreateProperty,
+                    edit: EditProperty,
+                  },
+                  {
+                    name: "agents",
+                    list: Agents,
+                    show: AgentProfile,
+                    meta: {
+                      canDelete: true,
+                      icon: <PeopleAltOutlined/>
+                    },
+                  },
+                  {
+                    name: "review",
+                    icon: <StarOutlineRounded/>,
+                    list: "/review",
+                    create: "/review/create",
+                    edit: "/review/edit/:id",
+                    show: "/review/show/:id",
                     meta: {
                       canDelete: true,
                     },
                   },
                   {
-                    name: "categories",
-                    list: "/categories",
-                    create: "/categories/create",
-                    edit: "/categories/edit/:id",
-                    show: "/categories/show/:id",
+                    name: "message",
+                    icon: <ChatBubbleOutlined/>,
+                    list: "/message",
+                    create: "/message/create",
+                    edit: "/message/edit/:id",
+                    show: "/message/show/:id",
+                    meta: {
+                      canDelete: true,
+                    },
+                  },
+                  {
+                    name: "my-profile",
+                    icon: <AccountCircleOutlined/>,
+                    options:{label:'My Profile'},
+                    list: MyProfile,
                     meta: {
                       canDelete: true,
                     },
@@ -174,8 +226,9 @@ function App() {
                   syncWithLocation: true,
                   warnWhenUnsavedChanges: true,
                   useNewQueryKeys: true,
-                  projectId: "O2NWYr-nBKthn-GGbNVm",
+                  projectId: "omd6FW-6QGob3-GoEYco",
                 }}
+                
               >
                 <Routes>
                   <Route
@@ -184,13 +237,7 @@ function App() {
                         key="authenticated-inner"
                         fallback={<CatchAllNavigate to="/login" />}
                       >
-                        <ThemedLayoutV2 
-                         Header={ThemedHeaderV2}
-                        Sider={ThemedSiderV2}
-                         Title={ThemedTitleV2}
-                        
-                        
-                        >
+                        <ThemedLayoutV2 Header={Header}>
                           <Outlet />
                         </ThemedLayoutV2>
                       </Authenticated>
@@ -198,19 +245,32 @@ function App() {
                   >
                     <Route
                       index
-                      element={<NavigateToResource resource="blog_posts" />}
+                      element={<NavigateToResource resource='home'/>}
                     />
-                    <Route path="/blog-posts">
-                      <Route index element={<BlogPostList />} />
-                      <Route path="create" element={<BlogPostCreate />} />
-                      <Route path="edit/:id" element={<BlogPostEdit />} />
-                      <Route path="show/:id" element={<BlogPostShow />} />
+                    <Route path="">
+                      <Route index element={<Home/>} />
                     </Route>
-                    <Route path="/categories">
-                      <Route index element={<CategoryList />} />
-                      <Route path="create" element={<CategoryCreate />} />
-                      <Route path="edit/:id" element={<CategoryEdit />} />
-                      <Route path="show/:id" element={<CategoryShow />} />
+                    <Route path="/properties">
+                      <Route index element={<AllProperties />} />
+                      <Route path="create" element={<CreateProperty />} />
+                      <Route path="edit/:id" element={<EditProperty />} />
+                      <Route path="show/:id" element={<PropertyDetails />} />
+                    </Route>
+                    <Route path="/agents">
+                      <Route index element={<Agents/>} />
+                      <Route path="show/:id" element={<AgentProfile />} />
+                    </Route>
+                    <Route path="/review">
+                      <Route index element={<Home/>} />
+                      <Route path="show/:id" element={<AgentProfile />} />
+                    </Route>
+                    <Route path="/message">
+                      <Route index element={<Home/>} />
+                      <Route path="show/:id" element={<AgentProfile />} />
+                    </Route>
+                    <Route path="/my-profile">
+                      <Route index element={<MyProfile/>} />
+                      <Route path="show/:id" element={<AgentProfile />} />
                     </Route>
                     <Route path="*" element={<ErrorComponent />} />
                   </Route>

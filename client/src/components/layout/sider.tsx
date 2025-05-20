@@ -36,6 +36,8 @@ import ListItemText from "@mui/material/ListItemText";
 import Paper from "@mui/material/Paper";
 import Tooltip from "@mui/material/Tooltip";
 import type { RefineThemedLayoutV2SiderProps } from "@refinedev/mui";
+import { ChevronRight } from "@mui/icons-material";
+import { Button } from "@mui/material";
 
 export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
   Title: TitleFromProps,
@@ -153,7 +155,7 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
                     primary={label}
                     primaryTypographyProps={{
                       noWrap: true,
-                      fontSize: "14px",
+                      fontSize: "16px",
                     }}
                   />
                   {isOpen ? (
@@ -215,7 +217,11 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
                 pl: isNested ? 4 : 2,
                 py: isNested ? 1.25 : 1,
                 justifyContent: "center",
-                color: isSelected ? "primary.main" : "text.primary",
+                color: isSelected ? "#1e36e8" : "#475be8",
+                margin: "10px auto",
+                borderRadius: '12px',
+                minHeight: '56px',
+                width: '90%'
               }}
             >
               <ListItemIcon
@@ -224,7 +230,7 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
                   transition: "margin-right 0.3s",
                   marginRight: siderCollapsed ? "0px" : "12px",
                   minWidth: "24px",
-                  color: "currentColor",
+                  color: isSelected ? "#fff" : "#808191",
                 }}
               >
                 {icon ?? <ListOutlined />}
@@ -233,7 +239,10 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
                 primary={label}
                 primaryTypographyProps={{
                   noWrap: true,
-                  fontSize: "14px",
+                  fontSize: "16px",
+                  fontWeight: isSelected ? "bold" : "normal",
+                  color: isSelected ? "#fff" : "#808191",
+                  marginLeft: '10px'
                 }}
               />
             </ListItemButton>
@@ -281,7 +290,8 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
             primary={translate("dashboard.title", "Dashboard")}
             primaryTypographyProps={{
               noWrap: true,
-              fontSize: "14px",
+              fontSize: "16px",
+              fontWeight: selectedKey === "/"? "bold" :"normal",
             }}
           />
         </ListItemButton>
@@ -318,7 +328,12 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
         key="logout"
         onClick={() => handleLogout()}
         sx={{
+
           justifyContent: "center",
+          margin :"10px auto",
+          borderRadius: '12px',
+          minHeight: '56px',
+          width: '90%'
         }}
       >
         <ListItemIcon
@@ -327,7 +342,7 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
             minWidth: "24px",
             transition: "margin-right 0.3s",
             marginRight: siderCollapsed ? "0px" : "12px",
-            color: "currentColor",
+            color: "#808191",
           }}
         >
           <Logout />
@@ -336,7 +351,7 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
           primary={t("buttons.logout", "Logout")}
           primaryTypographyProps={{
             noWrap: true,
-            fontSize: "14px",
+            fontSize: "16px",
           }}
         />
       </ListItemButton>
@@ -367,6 +382,7 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
     <List
       disablePadding
       sx={{
+        color: '#808191',
         flexGrow: 1,
         paddingTop: "16px",
       }}
@@ -408,11 +424,16 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
             display: {
               sm: "block",
               md: "none",
-            },
+            },"& .MuiDrawer-Paper":{
+              width:256,
+              bgcolor: "#FCFCFC",
+
+            }
           }}
         >
           <Box
             sx={{
+
               width: drawerWidth(),
             }}
           >
@@ -429,12 +450,31 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
             </Box>
             {drawer}
           </Box>
+            <Button
+            sx={{
+              background: "#475BE8",
+              color: "primary.contrastText",
+              textAlign: "center",
+              borderRadius: 0,
+              borderTop: "1px solid #ffffff1a",
+              "&:hover": {
+                background: "#1e36e8",
+              },
+            }}
+            fullWidth
+            size="large"
+            onClick={() => setSiderCollapsed(!siderCollapsed)} // ← FIXED
+             >
+            {siderCollapsed ? <ChevronRight /> : <ChevronLeft />} 
+          </Button>
         </Drawer>
         <Drawer
           variant="permanent"
+          PaperProps={{elevation:0}}
           sx={{
             display: { xs: "none", md: "block" },
             "& .MuiDrawer-paper": {
+              bgcolor: "#FCFCFC",
               width: drawerWidth(),
               overflow: "hidden",
               transition: "width 200ms cubic-bezier(0.4, 0, 0.6, 1) 0ms",

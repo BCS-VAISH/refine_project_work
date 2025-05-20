@@ -24,7 +24,9 @@ export const ThemedHeaderV2: React.FC<RefineThemedLayoutV2HeaderProps> = ({
   const prefferedSticky = pickNotDeprecated(sticky, isSticky) ?? true;
 
   return (
-    <AppBar position={prefferedSticky ? "sticky" : "relative"}>
+    <AppBar position= "sticky" elevation={0} sx={{
+      background: "#fcfcfc"
+    }}>
       <Toolbar>
         <HamburgerMenu />
         <Stack
@@ -32,6 +34,7 @@ export const ThemedHeaderV2: React.FC<RefineThemedLayoutV2HeaderProps> = ({
           width="100%"
           justifyContent="flex-end"
           alignItems="center"
+          color="#fff"
         >
           <Stack
             direction="row"
