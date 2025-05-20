@@ -44,19 +44,19 @@ export const ThemedTitleV2: React.FC<RefineLayoutThemedTitleProps> = ({
       <SvgIcon height="24px" width="24px" color="primary">
         {icon}
       </SvgIcon>
-      {!collapsed? (
-        <img
-          src={logo}
-          alt="yariga"
-          width="28px"
-        />
-      ):(
-           <img
-          src={yariga}
-          alt="yariga"
-          width="28px"
-        />
-      )}
+      {/* Logo image based on collapsed */}
+            <img
+              src={collapsed ? logo : yariga}
+              alt={collapsed ? "Yariga Icon" : "Yariga Logo"}
+              width={collapsed ? "28px" : "148px"}
+            />
+      
+            {/* Optional text if needed in future */}
+            {/* {!collapsed && text && (
+              <Typography variant="h6" color="text.primary">
+                {text}
+              </Typography>
+            )} */}
     </MuiLink>
   );
 };
