@@ -15,7 +15,7 @@ import {
 import { grey } from '@mui/material/colors'
 
 const home = () => {
-  const {data, isLoading, isError} = useList({
+ /* const {data, isLoading, isError} = useList({
     resource:'properties',
     config:{
       pagination:{
@@ -25,7 +25,7 @@ const home = () => {
   })
   const latestProperties= data?.data??[];
   if(isLoading) return <div>Loading...</div>
-  if(isError) return <div>Error</div>
+  if(isError) return <div>Error</div>*/
   return (
     <Box>
       <Typography fontSize={25} fontWeight={700} color='#11142D'>
@@ -76,16 +76,7 @@ const home = () => {
           Latest Properties
         </Typography>
         <Box mt={2.5} sx={{display:'flex', flexWrap:'wrap', gap:4}}>
-          {latestProperties.map((property)=>(
-            <PropertyCard
-              key={property._id}
-              id ={property.id}
-              title = {property.title}
-              price = {property.price}
-              location = {property.location}
-              photo={property.photo}
-            />
-          ))}
+          
         </Box>
       </Box>
     </Box>

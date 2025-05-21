@@ -159,7 +159,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <GitHubBanner />
+     
       <RefineKbarProvider>
         <ColorModeContextProvider>
           <CssBaseline />
@@ -167,7 +167,7 @@ function App() {
           <RefineSnackbarProvider>
             <DevtoolsProvider>
               <Refine
-                dataProvider={dataProvider("http://localhost:8080/api/v1")}
+                
                 notificationProvider={useNotificationProvider}
                 routerProvider={routerBindings}
                 authProvider={authProvider}
@@ -187,7 +187,7 @@ function App() {
                     show: AgentProfile,
                     icon: <PeopleAltOutlined/>,
                     meta: {
-                      canDelete: true,
+                      canDelete: true
                       
                     },
                   },
@@ -238,7 +238,12 @@ function App() {
                         key="authenticated-inner"
                         fallback={<CatchAllNavigate to="/login" />}
                       >
-                        <ThemedLayoutV2 Header={Header}>
+                        <ThemedLayoutV2 
+                           Header={ThemedHeaderV2}
+                           Title={ThemedTitleV2}
+                           Sider={ThemedSiderV2}
+                        
+                        >
                           <Outlet />
                         </ThemedLayoutV2>
                       </Authenticated>
@@ -246,9 +251,9 @@ function App() {
                   >
                     <Route
                       index
-                      element={<NavigateToResource resource='home'/>}
+                      element={<Home/>}
                     />
-                    <Route path="">
+                    <Route path="/">
                       <Route index element={<Home/>} />
                     </Route>
                     <Route path="/properties">
@@ -285,6 +290,7 @@ function App() {
                       </Authenticated>
                     }
                   >
+                   
                     <Route path="/login" element={<Login />} />
                   </Route>
                 </Routes>
