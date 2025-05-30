@@ -41,9 +41,8 @@ export const ThemedTitleV2: React.FC<RefineLayoutThemedTitleProps> = ({
         ...wrapperStyles,
       }}
     >
-      <SvgIcon height="24px" width="24px" color="primary">
-        {icon}
-      </SvgIcon>
+
+
       {/* Logo image based on collapsed */}
             <img
               src={collapsed ? logo : yariga}
